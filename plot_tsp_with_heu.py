@@ -11,6 +11,7 @@ avg_generate = np.zeros((16, 1))
 log_avg = np.zeros((16, 1))
 
 for folder in os.listdir('tsp_problems'):
+    print(folder)
     if not fnmatch.fnmatch(folder, '.DS_Store') and not fnmatch.fnmatch(folder, 'problem36'):
         sum = 0
         for myfile in os.listdir(os.path.join('tsp_problems', folder)):
@@ -37,7 +38,7 @@ for folder in os.listdir('tsp_problems'):
             log_avg[int(folder) -1] = math.log(sum/10)
 
 #print(avg_generate)
-plt.plot(range(16), avg_generate)
+plt.plot(range(1, 17, 1), log_avg)
 plt.title('tsp with heuristic')
 plt.ylabel('log of #of nodes')
 plt.xlabel('#of cities')
