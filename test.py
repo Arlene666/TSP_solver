@@ -1,9 +1,9 @@
 import numpy as np
 import os
-import tsp
+import tsp_noheu
 import fnmatch
 import matplotlib.pyplot as plt
-
+import time
 import math
 
 avg_generate = np.zeros((10, 1))
@@ -16,8 +16,8 @@ nomatch = ['.DS_Store', 'problem36', '16', '15', '14', '13', '12', '11', '10', '
 '''
 
 count = 0
-for myfile in os.listdir('tsp_problems/8'):
-    f = open(os.path.join('tsp_problems/8', myfile))
+for myfile in os.listdir('tsp_problems/14'):
+    f = open(os.path.join('tsp_problems/14', myfile))
     content = f.readlines()
     content = [x.strip() for x in content]
 
@@ -30,15 +30,16 @@ for myfile in os.listdir('tsp_problems/8'):
         y = int(t[2])
         points.append((city, x, y))
 
-    path, weight, generate = tsp.tsp(points)
+    path, weight, generate = tsp_noheu.tsp_noheu(time.time(), points)
     f.close()
     avg_generate[count] = generate
     count += 1
 
     print(generate)
 
-plt.plot(range(10), avg_generate)
-
-
-
+plt.title('tsp with heuristic')
+plt.ylabel('log of #of nodes')
+plt.xlabel('#of cities')
+plt.plot(range(1,11), avg_generate)
+plt.savefig("test.png")
 
