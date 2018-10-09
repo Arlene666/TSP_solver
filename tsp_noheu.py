@@ -75,13 +75,13 @@ def pathlen(points):
     return plen
 
 
-def tsp_noheu(points):
+def tsp_noheu(startTime, points):
     global num_generate
     num_generate = 0
     if len(points) == 1:
         return points, 0, 0
 
-    def tsp_search(points):
+    def tsp_search(startTime, points):
         left = [points[0]]
         right = points[1:]
         # print(right)
@@ -95,6 +95,11 @@ def tsp_noheu(points):
             node = heappop(frontier)
             left = node[1][0]
             right = node[1][1]
+
+            if time.time() - startTime > 300:
+                print("--- %ds timeout, returning results so far ---" % (time.time() - startTime))
+                return left, pathlen(left), num_generate
+
             if len(left) == len(points):
                 left.append(points[0])
                 plen = pathlen(left)
@@ -112,10 +117,10 @@ def tsp_noheu(points):
                     global num_generate
                     num_generate += 1
                     heappush(frontier, (f, (newleft, newright)))
-    return tsp_search(points)
+    return tsp_search(startTime, points)
 
 
-start_time = time.time()
+#start_time = time.time()
 
-print(tsp_noheu(info))
-print("--- %s seconds ---" % (time.time() - start_time))
+#print(tsp_noheu(info))
+#print("--- %s seconds ---" % (time.time() - start_time))

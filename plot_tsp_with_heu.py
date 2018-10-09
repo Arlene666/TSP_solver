@@ -4,7 +4,7 @@ import tsp
 import fnmatch
 import matplotlib.pyplot as plt
 import math
-
+import time
 
 avg_generate = np.zeros((16, 1))
 
@@ -27,7 +27,7 @@ for folder in os.listdir('tsp_problems'):
                 y = int(t[2])
                 points.append((city, x, y))
 
-            path, weight, generate = tsp.tsp(points)
+            path, weight, generate = tsp.tsp(time.time(), points)
             sum += generate
             f.close()
         avg_generate[int(folder)-1] = sum / 10
@@ -37,10 +37,11 @@ for folder in os.listdir('tsp_problems'):
             log_avg[int(folder) -1] = math.log(sum/10)
 
 #print(avg_generate)
-plt.plot(range(16), avg_generate)
 plt.title('tsp with heuristic')
 plt.ylabel('log of #of nodes')
 plt.xlabel('#of cities')
+plt.plot(range(1,17), avg_generate)
+plt.savefig("tsp_with_heu.png")
 
 #print(log_avg)
 #plt.plot(range(16), log_avg)

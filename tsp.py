@@ -6,7 +6,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 from heapq import heappush, heappop
 
-f = open('tsp_problems/10/instance_4.txt')
+f = open('tsp_problems/13/instance_1.txt')
 content = f.readlines()
 content = [x.strip() for x in content]
 
@@ -60,7 +60,7 @@ def mst_weight(adj):
         return 0
     X = csr_matrix(adj)
     Tcsr = minimum_spanning_tree(X)
-    return np.sum(Tcsr)
+    return Tcsr.sum()
 
 #print(adj_mat(info))
 
@@ -75,13 +75,13 @@ def pathlen(points):
     return plen
 
 
-def tsp(points):
+def tsp(startTime, points):
     global num_generate
     num_generate = 0
     if len(points) == 1:
         return points, 0, 0
 
-    def tsp_search(points):
+    def tsp_search(startTime, points):
         left = [points[0]]
         right = points[1:]
         # print(right)
@@ -95,6 +95,11 @@ def tsp(points):
             node = heappop(frontier)
             left = node[1][0]
             right = node[1][1]
+
+            if time.time() - startTime > 300:
+                print("--- %ds timeout, returning results so far ---" % (time.time() - startTime))
+                return left, pathlen(left), num_generate
+
             if len(left) == len(points):
                 left.append(points[0])
                 plen = pathlen(left)
@@ -112,11 +117,11 @@ def tsp(points):
                     global num_generate
                     num_generate += 1
                     heappush(frontier, (f, (newleft, newright)))
-    return tsp_search(points)
+    return tsp_search(startTime, points)
 
 
-start_time = time.time()
+#start_time = time.time()
 
-print(tsp(info))
-print("--- %s seconds ---" % (time.time() - start_time))
+print(tsp(time.time(), info))
+#print("--- %s seconds ---" % (time.time() - start_time))
 
