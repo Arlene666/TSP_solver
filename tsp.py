@@ -6,7 +6,7 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import minimum_spanning_tree
 from heapq import heappush, heappop
 
-f = open('tsp_problems/13/instance_1.txt')
+'''f = open('tsp_problems/15/instance_4.txt')
 content = f.readlines()
 content = [x.strip() for x in content]
 
@@ -18,7 +18,7 @@ for i in range(1, size+1):
     x = int(t[1])
     y = int(t[2])
     info.append((city, x, y))
-
+'''
 
 
 def distance(pointA, pointB):
