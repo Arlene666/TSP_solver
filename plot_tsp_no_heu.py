@@ -57,7 +57,7 @@ plt.ylabel('log of # of nodes generated')
 plt.xlabel('# of cities')
 plt.plot(range(1, 17), log_avg)
 
-plt.savefig('tsp_no_neu.png')
-np.savetxt('tsp_no_neu.dat', log_avg, "%.6f")
-np.savetxt('tsp_no_neu.time', time_spent, "%.3f")
+plt.savefig('tsp_no_heu.png')
+np.savetxt('tsp_no_heu.dat', log_avg, "%.6f")
+np.savetxt('tsp_no_heu.time', time_spent, "%.3f")
 
