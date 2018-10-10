@@ -35,7 +35,7 @@ for folder in os.listdir('tsp_problems'):
             all_instances.append(points)
             f.close()
 
-        workers = Pool(4)
+        workers = Pool(10)
         results = workers.map(tsp.tsp, all_instances)
         workers.close()
         workers.join()

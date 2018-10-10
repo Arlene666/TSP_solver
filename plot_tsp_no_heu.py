@@ -13,7 +13,7 @@ avg_generate = np.zeros((16, 1))
 log_avg = np.zeros((16, 1))
 time_spent = np.zeros((16,1))
 
-nomatch = ['.DS_Store', 'problem36', '16', '15']
+nomatch = ['.DS_Store', 'problem36']
 
 for folder in os.listdir('tsp_problems'):
     if not str(folder) in nomatch:
@@ -37,7 +37,7 @@ for folder in os.listdir('tsp_problems'):
             all_instances.append(points)
             f.close()
 
-        workers = Pool(4)
+        workers = Pool(10)
         results = workers.map(tsp_noheu.tsp_noheu, all_instances)
         workers.close()
         workers.join()
