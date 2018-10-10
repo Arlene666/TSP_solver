@@ -75,13 +75,14 @@ def pathlen(points):
     return plen
 
 
-def tsp(startTime, points):
+def tsp(points):
     global num_generate
     num_generate = 0
     if len(points) == 1:
-        return points, 0, 0
+        return points, 0, 0, 0
 
-    def tsp_search(startTime, points):
+    def tsp_search(points):
+        startTime = time.time()
         left = [points[0]]
         right = points[1:]
         # print(right)
@@ -98,12 +99,12 @@ def tsp(startTime, points):
 
             if time.time() - startTime > 300:
                 print("--- %ds timeout, returning results so far ---" % (time.time() - startTime))
-                return left, pathlen(left), num_generate
+                return left, pathlen(left), num_generate, time.time() - startTime
 
             if len(left) == len(points):
                 left.append(points[0])
                 plen = pathlen(left)
-                return left, plen, num_generate
+                return left, plen, num_generate, time.time() - startTime
             else:
                 size = len(right)
                 for i in range(size):
@@ -117,11 +118,11 @@ def tsp(startTime, points):
                     global num_generate
                     num_generate += 1
                     heappush(frontier, (f, (newleft, newright)))
-    return tsp_search(startTime, points)
+    return tsp_search(points)
 
 
 #start_time = time.time()
 
-print(tsp(time.time(), info))
+#print(tsp(time.time(), info))
 #print("--- %s seconds ---" % (time.time() - start_time))
 
