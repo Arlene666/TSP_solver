@@ -2,6 +2,8 @@ import numpy as np
 import os
 import tsp
 import fnmatch
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import math
 import time

@@ -2,6 +2,8 @@ import numpy as np
 import os
 import tsp_noheu
 import fnmatch
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import math
 import time
@@ -11,7 +13,7 @@ avg_generate = np.zeros((16, 1))
 log_avg = np.zeros((16, 1))
 time_spent = np.zeros((16,1))
 
-nomatch = ['.DS_Store', 'problem36', '16', '15', '14', '13']
+nomatch = ['.DS_Store', 'problem36', '16', '15']
 
 for folder in os.listdir('tsp_problems'):
     if not str(folder) in nomatch:
