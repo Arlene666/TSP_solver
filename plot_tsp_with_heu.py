@@ -35,7 +35,7 @@ for folder in os.listdir('tsp_problems'):
         if sum == 0:
             log_avg[int(folder) -1] = 0
         else:
-            log_avg[int(folder) -1] = math.log(sum/10)
+            log_avg[int(folder) -1] = math.log(sum/10, 10)
 
 #print(avg_generate)
 plt.title('tsp with heuristic')
