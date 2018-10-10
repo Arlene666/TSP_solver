@@ -37,12 +37,11 @@ for folder in os.listdir('tsp_problems'):
         else:
             log_avg[int(folder) -1] = math.log(sum/10, 10)
 
-#print(avg_generate)
 plt.title('tsp with heuristic')
 plt.ylabel('log of #of nodes')
 plt.xlabel('#of cities')
 plt.plot(range(1,17), avg_generate)
 plt.savefig("tsp_with_heu.png")
 
-#print(log_avg)
+print(log_avg)
 #plt.plot(range(16), log_avg)
