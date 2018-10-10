@@ -53,7 +53,7 @@ for folder in os.listdir('tsp_problems'):
 plt.title('tsp with heuristic')
 plt.ylabel('log of # of nodes')
 plt.xlabel('# of cities')
-plt.plot(range(1,17), avg_generate)
+plt.plot(range(1,17), log_avg)
 
 plt.savefig("tsp_with_heu.png")
 np.savetxt('tsp_with_heu.dat', log_avg, "%.6f")
